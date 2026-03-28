@@ -1,6 +1,11 @@
 import express, { Router } from "express";
 import cors from "cors";
-
+import cookieParser from "cookie-parser";
+import swaggerUi from "swagger-ui-express";
+import swaggerSpec from "./docs/swagger.js";
+import authRoutes from "./module/Auth/auth.routes.js";
+import blogRoutes from "./module/Blog/blog.routes.js";
+import errorMiddleware from "./middlewares/errorMiddleware.js";
 
 class AppWrapper {
     app: express.Application;
@@ -9,28 +14,26 @@ class AppWrapper {
 
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: true }));
+        this.app.use(cookieParser());
         this.app.use(cors({
             origin: ["http://localhost:5173"],
             credentials: true,
-            methods: ["GET", "POST", "PUT", "DELETE"],
+            methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
             maxAge: 24 * 60 * 60
         }))
-    }
 
-    public add(controller: { registerRoutes(router: Router): void }) {
-        const router = Router();
-        controller.registerRoutes(router);
+        // Swagger Documentation
+        this.app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-        const route: string[] = []
+        // API Routes
+        const apiRouter = Router();
+        apiRouter.use("/auth", authRoutes);
+        apiRouter.use("/blog", blogRoutes);
+        
+        this.app.use("/api", apiRouter);
 
-        router.stack.forEach((layer) => {
-            if (layer.route) {
-                route.push(layer.route.path)
-            }
-        })
-
-        console.log("Registered Routes: ", route);
-        this.app.use("/api", router);
+        // Global Error Handling
+        this.app.use(errorMiddleware);
     }
 }
 
