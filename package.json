@@ -1,0 +1,52 @@
+{
+  "name": "credex-dashboard",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Sandeep Rajak",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "check:lint": "eslint .",
+    "check:format": "prettier --check .",
+    "check:type": "tsc --noEmit",
+    "check": "npm run check:lint && npm run check:format && npm run check:type",
+    "fix:lint": "eslint . --fix",
+    "fix:format": "prettier --write .",
+    "fix": "npm run fix:lint && npm run fix:format",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.5.0",
+    "@typescript-eslint/eslint-plugin": "^8.57.2",
+    "@typescript-eslint/parser": "^8.57.2",
+    "eslint": "^10.1.0",
+    "globals": "^17.4.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "nodemon": "^3.1.14",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^8.57.2"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
+}
