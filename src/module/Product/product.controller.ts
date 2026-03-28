@@ -1,13 +1,13 @@
 import type { Request, Response, NextFunction } from "express";
-import BlogService from "./BlogService.ts";
+import ProductService from "./ProductService.ts";
 
-class BlogController {
+class ProductController {
   async create(req: Request, res: Response, next: NextFunction) {
     try {
-      const blog = await BlogService.create(req.body);
+      const product = await ProductService.create(req.body);
       res.status(201).json({
         success: true,
-        data: blog,
+        data: product,
       });
     } catch (error) {
       next(error);
@@ -16,10 +16,10 @@ class BlogController {
 
   async update(req: Request, res: Response, next: NextFunction) {
     try {
-      const blog = await BlogService.update(req.params.id as string, req.body);
+      const product = await ProductService.update(req.params.id as string, req.body);
       res.status(200).json({
         success: true,
-        data: blog,
+        data: product,
       });
     } catch (error) {
       next(error);
@@ -28,19 +28,19 @@ class BlogController {
 
   async delete(req: Request, res: Response, next: NextFunction) {
     try {
-      const result = await BlogService.softDelete(req.params.id as string);
+      const result = await ProductService.softDelete(req.params.id as string);
       res.status(200).json(result);
     } catch (error) {
       next(error);
     }
   }
 
-  async viewBySlug(req: Request, res: Response, next: NextFunction) {
+  async getById(req: Request, res: Response, next: NextFunction) {
     try {
-      const blog = await BlogService.getBySlug(req.params.slug as string);
+      const product = await ProductService.getById(req.params.id as string);
       res.status(200).json({
         success: true,
-        data: blog,
+        data: product,
       });
     } catch (error) {
       next(error);
@@ -49,11 +49,12 @@ class BlogController {
 
   async list(req: Request, res: Response, next: NextFunction) {
     try {
-      const { page, limit, active, sortBy, order } = req.query;
-      const result = await BlogService.list({
+      const { page, limit, active, validity, sortBy, order } = req.query;
+      const result = await ProductService.list({
         page: Number(page) || 1,
         limit: Number(limit) || 10,
         active: active !== undefined ? active === "true" : true,
+        validity: validity as string,
         sortBy: sortBy as string,
         order: order as "asc" | "desc",
       });
@@ -67,4 +68,4 @@ class BlogController {
   }
 }
 
-export default new BlogController();
+export default new ProductController();

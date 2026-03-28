@@ -1,6 +1,6 @@
-import { Request, Response, NextFunction } from "express";
+import type { Request, Response, NextFunction } from "express";
 import createError from "http-errors";
-import { verifyAccessToken } from "../utils/tokenUtils.js";
+import { verifyAccessToken } from "../utils/tokenUtils.ts";
 
 const authMiddleware = (
   req: Request,
@@ -18,6 +18,7 @@ const authMiddleware = (
     req.user = decoded;
     next();
   } catch (_error: unknown) {
+    console.log("error: ", _error)
     next(createError(401, "Invalid or expired access token"));
   }
 };

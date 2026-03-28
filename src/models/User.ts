@@ -1,8 +1,11 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose from "mongoose";
+import type { Schema } from "mongoose";
 import bcrypt from "bcryptjs";
-import { IUser } from "../module/Auth/auth.interface.js";
+import type { IUser } from "../module/Auth/auth.interface.ts";
 
-const UserSchema: Schema<IUser> = new Schema(
+
+
+const UserSchema: Schema<IUser> = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -23,8 +26,8 @@ const UserSchema: Schema<IUser> = new Schema(
       select: false, // Don't return password by default
     },
     refreshToken: {
-        type: String,
-        select: false,
+      type: String,
+      select: false,
     }
   },
   {

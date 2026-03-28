@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from "express";
-import AuthService from "./AuthSevice.js";
+import type { Request, Response, NextFunction } from "express";
+import AuthService from "./AuthSevice.ts";
 
 class AuthController {
   private setCookie(res: Response, name: string, token: string, maxAge: number) {

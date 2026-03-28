@@ -1,4 +1,4 @@
-import { IJwtPayload } from "../../module/Auth/auth.interface.js";
+import type { IJwtPayload } from "../../module/Auth/auth.interface.ts";
 
 declare global {
   namespace Express {

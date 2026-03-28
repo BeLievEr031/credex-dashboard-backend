@@ -1,7 +1,7 @@
 import createError from "http-errors";
-import User from "../../models/User.js";
-import { IUser } from "./auth.interface.js";
-import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from "../../utils/tokenUtils.js";
+import User from "../../models/User.ts";
+import type { IUser } from "./auth.interface.ts";
+import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from "../../utils/tokenUtils.ts";
 
 class AuthService {
     async register(userData: Partial<IUser>) {

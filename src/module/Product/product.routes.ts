@@ -1,6 +1,6 @@
 import { Router } from "express";
-import BlogController from "./blog.controller.ts";
-import { createBlogValidation, updateBlogValidation } from "./blog.validation.ts";
+import ProductController from "./product.controller.ts";
+import { createProductValidation, updateProductValidation } from "./product.validation.ts";
 import validationMiddleware from "../../middlewares/validationMiddleware.ts";
 import authMiddleware from "../../middlewares/authMiddleware.ts";
 
@@ -9,16 +9,16 @@ const router = Router();
 /**
  * @swagger
  * tags:
- *   name: Blog
- *   description: Blog management and public viewing
+ *   name: Product
+ *   description: Product management and public viewing
  */
 
 /**
  * @swagger
- * /blog/create:
+ * /product/create:
  *   post:
- *     summary: Create a new blog post
- *     tags: [Blog]
+ *     summary: Create a new product
+ *     tags: [Product]
  *     security:
  *       - cookieAuth: []
  *     requestBody:
@@ -28,33 +28,38 @@ const router = Router();
  *           schema:
  *             type: object
  *             required:
- *               - title
- *               - blogJSONData
+ *               - product
+ *               - validity
+ *               - credits
  *             properties:
- *               title:
+ *               product:
  *                 type: string
- *               slug:
+ *               validity:
  *                 type: string
- *               blogJSONData:
- *                 type: object
- *               bannerImgUrl:
+ *               credits:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *               rateLimit:
+ *                 type: string
+ *               productImgUrl:
  *                 type: string
  *     responses:
  *       201:
- *         description: Blog created successfully
+ *         description: Product created successfully
  *       400:
  *         description: Validation error
  *       401:
  *         description: Unauthorized
  */
-router.post("/create", authMiddleware, createBlogValidation, validationMiddleware, BlogController.create.bind(BlogController));
+router.post("/create", authMiddleware, createProductValidation, validationMiddleware, ProductController.create.bind(ProductController));
 
 /**
  * @swagger
- * /blog/update/{id}:
+ * /product/update/{id}:
  *   patch:
- *     summary: Update an existing blog post
- *     tags: [Blog]
+ *     summary: Update an existing product
+ *     tags: [Product]
  *     security:
  *       - cookieAuth: []
  *     parameters:
@@ -69,30 +74,34 @@ router.post("/create", authMiddleware, createBlogValidation, validationMiddlewar
  *           schema:
  *             type: object
  *             properties:
- *               title:
+ *               product:
  *                 type: string
- *               slug:
+ *               validity:
  *                 type: string
- *               blogJSONData:
- *                 type: object
- *               bannerImgUrl:
+ *               credits:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *               rateLimit:
+ *                 type: string
+ *               productImgUrl:
  *                 type: string
  *               active:
  *                 type: boolean
  *     responses:
  *       200:
- *         description: Blog updated successfully
+ *         description: Product updated successfully
  *       404:
- *         description: Blog not found
+ *         description: Product not found
  */
-router.patch("/update/:id", authMiddleware, updateBlogValidation, validationMiddleware, BlogController.update.bind(BlogController));
+router.patch("/update/:id", authMiddleware, updateProductValidation, validationMiddleware, ProductController.update.bind(ProductController));
 
 /**
  * @swagger
- * /blog/delete/{id}:
+ * /product/delete/{id}:
  *   delete:
- *     summary: Soft delete a blog post
- *     tags: [Blog]
+ *     summary: Soft delete a product
+ *     tags: [Product]
  *     security:
  *       - cookieAuth: []
  *     parameters:
@@ -103,38 +112,38 @@ router.patch("/update/:id", authMiddleware, updateBlogValidation, validationMidd
  *           type: string
  *     responses:
  *       200:
- *         description: Blog deactivated successfully
+ *         description: Product deactivated successfully
  *       404:
- *         description: Blog not found
+ *         description: Product not found
  */
-router.delete("/delete/:id", authMiddleware, BlogController.delete.bind(BlogController));
+router.delete("/delete/:id", authMiddleware, ProductController.delete.bind(ProductController));
 
 /**
  * @swagger
- * /blog/view/{slug}:
+ * /product/view/{id}:
  *   get:
- *     summary: View a blog post by slug
- *     tags: [Blog]
+ *     summary: View a product by ID
+ *     tags: [Product]
  *     parameters:
  *       - in: path
- *         name: slug
+ *         name: id
  *         required: true
  *         schema:
  *           type: string
  *     responses:
  *       200:
- *         description: Blog retrieved successfully
+ *         description: Product retrieved successfully
  *       404:
- *         description: Blog not found
+ *         description: Product not found
  */
-router.get("/view/:slug", BlogController.viewBySlug.bind(BlogController));
+router.get("/view/:id", ProductController.getById.bind(ProductController));
 
 /**
  * @swagger
- * /blog/view:
+ * /product/view:
  *   get:
- *     summary: List blog posts with pagination
- *     tags: [Blog]
+ *     summary: List products with pagination
+ *     tags: [Product]
  *     parameters:
  *       - in: query
  *         name: page
@@ -149,6 +158,10 @@ router.get("/view/:slug", BlogController.viewBySlug.bind(BlogController));
  *         schema:
  *           type: boolean
  *       - in: query
+ *         name: validity
+ *         schema:
+ *           type: string
+ *       - in: query
  *         name: sortBy
  *         schema:
  *           type: string
@@ -159,8 +172,8 @@ router.get("/view/:slug", BlogController.viewBySlug.bind(BlogController));
  *           enum: [asc, desc]
  *     responses:
  *       200:
- *         description: List of blogs retrieved successfully
+ *         description: List of products retrieved successfully
  */
-router.get("/view", BlogController.list.bind(BlogController));
+router.get("/view", ProductController.list.bind(ProductController));
 
 export default router;

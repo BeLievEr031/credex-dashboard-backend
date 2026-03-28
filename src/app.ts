@@ -2,10 +2,11 @@ import express, { Router } from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import swaggerUi from "swagger-ui-express";
-import swaggerSpec from "./docs/swagger.js";
-import authRoutes from "./module/Auth/auth.routes.js";
-import blogRoutes from "./module/Blog/blog.routes.js";
-import errorMiddleware from "./middlewares/errorMiddleware.js";
+import swaggerSpec from "./docs/swagger.ts";
+import authRoutes from "./module/Auth/auth.routes.ts";
+import blogRoutes from "./module/Blog/blog.routes.ts";
+import productRoutes from "./module/Product/product.routes.ts";
+import errorMiddleware from "./middlewares/errorMiddleware.ts";
 
 class AppWrapper {
     app: express.Application;
@@ -29,6 +30,7 @@ class AppWrapper {
         const apiRouter = Router();
         apiRouter.use("/auth", authRoutes);
         apiRouter.use("/blog", blogRoutes);
+        apiRouter.use("/product", productRoutes);
         
         this.app.use("/api", apiRouter);
 

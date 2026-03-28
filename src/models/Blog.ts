@@ -1,4 +1,5 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose from "mongoose";
+import type { Schema, Document } from "mongoose";
 
 export interface IBlog extends Document {
   slug: string;
@@ -10,7 +11,7 @@ export interface IBlog extends Document {
   updatedAt: Date;
 }
 
-const BlogSchema: Schema<IBlog> = new Schema(
+const BlogSchema: Schema<IBlog> = new mongoose.Schema(
   {
     slug: {
       type: String,

@@ -1,6 +1,6 @@
 import createError from "http-errors";
-import Blog from "../../models/Blog.js";
-import { IBlogCreateRequest, IBlogUpdateRequest, IBlogQuery } from "./blog.interface.js";
+import Blog from "../../models/Blog.ts";
+import type { IBlogCreateRequest, IBlogUpdateRequest, IBlogQuery } from "./blog.interface.ts";
 
 class BlogService {
   private generateSlug(title: string): string {
@@ -26,7 +26,7 @@ class BlogService {
     if (!slug) {
       slug = this.generateSlug(title);
     }
-    
+
     slug = await this.ensureUniqueSlug(slug);
 
     const blog = await Blog.create({ ...data, slug });
@@ -40,16 +40,16 @@ class BlogService {
     }
 
     if (data.title && !data.slug) {
-        // Option: re-generate slug if title changes (optional, but the user asked for auto-generation)
-        // However, standard SEO practice is to keep slugs stable. 
-        // I'll only auto-generate if title changes and slug is NOT provided.
+      // Option: re-generate slug if title changes (optional, but the user asked for auto-generation)
+      // However, standard SEO practice is to keep slugs stable. 
+      // I'll only auto-generate if title changes and slug is NOT provided.
     }
 
     if (data.slug) {
-        const existing = await Blog.findOne({ slug: data.slug, _id: { $ne: id } });
-        if (existing) {
-            throw createError(409, "Slug is already in use");
-        }
+      const existing = await Blog.findOne({ slug: data.slug, _id: { $ne: id } });
+      if (existing) {
+        throw createError(409, "Slug is already in use");
+      }
     }
 
     Object.assign(blog, data);
