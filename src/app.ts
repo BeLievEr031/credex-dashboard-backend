@@ -19,7 +19,7 @@ class AppWrapper {
         this.app.use(express.urlencoded({ extended: true, limit: "10mb" }));
         this.app.use(cookieParser());
         this.app.use(cors({
-            origin: ["http://localhost:5173"],
+            origin: ["http://localhost:5173", "https://credex-dashboard-frontend.pages.dev"],
             credentials: true,
             methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
             maxAge: 24 * 60 * 60
