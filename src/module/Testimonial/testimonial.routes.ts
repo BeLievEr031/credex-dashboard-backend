@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { createTestimonialValidation } from "./testimonial.validation.ts";
-import validationMiddleware from "../../middlewares/validationMiddleware.ts";
-import authMiddleware from "../../middlewares/authMiddleware.ts";
-import TestimonialController from "./testimonial.controller.ts";
-import uploader from "../../utils/image.upload.ts";
+import { createTestimonialValidation } from "./testimonial.validation";
+import validationMiddleware from "../../middlewares/validationMiddleware";
+import authMiddleware from "../../middlewares/authMiddleware";
+import TestimonialController from "./testimonial.controller";
+import uploader from "../../utils/image.upload";
 
 
 const router = Router()

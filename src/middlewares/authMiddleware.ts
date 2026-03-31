@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 import createError from "http-errors";
-import { verifyAccessToken } from "../utils/tokenUtils.ts";
+import { verifyAccessToken } from "../utils/tokenUtils";
 
 const authMiddleware = (
   req: Request,

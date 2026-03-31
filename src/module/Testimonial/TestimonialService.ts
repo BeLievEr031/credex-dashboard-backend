@@ -1,4 +1,4 @@
-import Testimonial, { type ITestimonial } from "../../models/Testimonial.ts";
+import Testimonial, { type ITestimonial } from "../../models/Testimonial";
 
 class TestimonialService {
 

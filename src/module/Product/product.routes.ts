@@ -1,8 +1,8 @@
 import { Router } from "express";
-import ProductController from "./product.controller.ts";
-import { createProductValidation, updateProductValidation } from "./product.validation.ts";
-import validationMiddleware from "../../middlewares/validationMiddleware.ts";
-import authMiddleware from "../../middlewares/authMiddleware.ts";
+import ProductController from "./product.controller";
+import { createProductValidation, updateProductValidation } from "./product.validation";
+import validationMiddleware from "../../middlewares/validationMiddleware";
+import authMiddleware from "../../middlewares/authMiddleware";
 
 const router = Router();
 

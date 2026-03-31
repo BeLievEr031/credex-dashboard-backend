@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
-import Blog from "../../models/Blog.ts";
-import Product from "../../models/Product.ts";
+import Blog from "../../models/Blog";
+import Product from "../../models/Product";
 
 class DashboardController {
   async getStats(req: Request, res: Response, next: NextFunction) {

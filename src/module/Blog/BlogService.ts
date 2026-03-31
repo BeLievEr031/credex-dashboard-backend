@@ -1,6 +1,6 @@
 import createError from "http-errors";
-import Blog from "../../models/Blog.ts";
-import type { IBlogCreateRequest, IBlogUpdateRequest, IBlogQuery } from "./blog.interface.ts";
+import Blog from "../../models/Blog";
+import type { IBlogCreateRequest, IBlogUpdateRequest, IBlogQuery } from "./blog.interface";
 
 class BlogService {
   private generateSlug(title: string): string {

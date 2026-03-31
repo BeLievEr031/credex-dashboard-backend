@@ -1,6 +1,6 @@
 import createError from "http-errors";
-import Product from "../../models/Product.ts";
-import type { IProductCreateRequest, IProductUpdateRequest, IProductQuery } from "./product.interface.ts";
+import Product from "../../models/Product";
+import type { IProductCreateRequest, IProductUpdateRequest, IProductQuery } from "./product.interface";
 
 class ProductService {
   async create(data: IProductCreateRequest) {

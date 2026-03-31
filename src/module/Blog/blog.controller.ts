@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
-import BlogService from "./BlogService.ts";
+import BlogService from "./BlogService";
 
 class BlogController {
   async create(req: Request, res: Response, next: NextFunction) {

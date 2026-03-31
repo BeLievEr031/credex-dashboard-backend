@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import type { Schema } from "mongoose";
 import bcrypt from "bcryptjs";
-import type { IUser } from "../module/Auth/auth.interface.ts";
+import type { IUser } from "../module/Auth/auth.interface";
 
 
 

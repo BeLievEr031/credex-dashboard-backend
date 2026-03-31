@@ -2,13 +2,13 @@ import express, { Router } from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import swaggerUi from "swagger-ui-express";
-import swaggerSpec from "./docs/swagger.ts";
-import authRoutes from "./module/Auth/auth.routes.ts";
-import blogRoutes from "./module/Blog/blog.routes.ts";
-import productRoutes from "./module/Product/product.routes.ts";
-import testimonialRoutes from "./module/Testimonial/testimonial.routes.ts"
-import dashboardRoutes from "./module/Dashboard/dashboard.routes.ts";
-import errorMiddleware from "./middlewares/errorMiddleware.ts";
+import swaggerSpec from "./docs/swagger";
+import authRoutes from "./module/Auth/auth.routes";
+import blogRoutes from "./module/Blog/blog.routes";
+import productRoutes from "./module/Product/product.routes";
+import testimonialRoutes from "./module/Testimonial/testimonial.routes"
+import dashboardRoutes from "./module/Dashboard/dashboard.routes";
+import errorMiddleware from "./middlewares/errorMiddleware";
 
 class AppWrapper {
     app: express.Application;

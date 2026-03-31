@@ -1,8 +1,8 @@
 import { Router } from "express";
-import BlogController from "./blog.controller.ts";
-import { createBlogValidation, updateBlogValidation } from "./blog.validation.ts";
-import validationMiddleware from "../../middlewares/validationMiddleware.ts";
-import authMiddleware from "../../middlewares/authMiddleware.ts";
+import BlogController from "./blog.controller";
+import { createBlogValidation, updateBlogValidation } from "./blog.validation";
+import validationMiddleware from "../../middlewares/validationMiddleware";
+import authMiddleware from "../../middlewares/authMiddleware";
 
 const router = Router();
 

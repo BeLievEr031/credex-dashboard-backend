@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
-import ProductService from "./ProductService.ts";
-import { cloudinary } from "../../utils/image.upload.ts";
+import ProductService from "./ProductService";
+import { cloudinary } from "../../utils/image.upload";
 
 class ProductController {
   async create(req: Request, res: Response, next: NextFunction) {

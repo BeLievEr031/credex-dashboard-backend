@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
-import TestimonialService from "./TestimonialService.ts";
-import { cloudinary } from "../../utils/image.upload.ts";
+import TestimonialService from "./TestimonialService";
+import { cloudinary } from "../../utils/image.upload";
 
 
 class TestimonialController {

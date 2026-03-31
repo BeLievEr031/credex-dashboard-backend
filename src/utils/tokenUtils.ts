@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
-import Config from "../config/config.ts";
-import type { IJwtPayload } from "../module/Auth/auth.interface.ts";
+import Config from "../config/config";
+import type { IJwtPayload } from "../module/Auth/auth.interface";
 
 export const generateAccessToken = (payload: IJwtPayload): string => {
   return jwt.sign(payload, Config.ACCESS_TOKEN_SECRET, {
