@@ -1,8 +1,8 @@
 import express, { Router } from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import swaggerUi from "swagger-ui-express";
-import swaggerSpec from "./docs/swagger";
+// import swaggerUi from "swagger-ui-express";
+// import swaggerSpec from "./docs/swagger";
 import authRoutes from "./module/Auth/auth.routes";
 import blogRoutes from "./module/Blog/blog.routes";
 import productRoutes from "./module/Product/product.routes";
@@ -26,7 +26,7 @@ class AppWrapper {
         }))
 
         // Swagger Documentation
-        this.app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+        // this.app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
         // API Routes
         const apiRouter = Router();
