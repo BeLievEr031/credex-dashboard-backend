@@ -16,7 +16,9 @@ class TestimonialController {
                 feedback: req.body.feedback,
                 imageUrl: result.secure_url,
                 publicId: result.public_id,
-                active: req.body.active
+                active: req.body.active,
+                designation: req.body.designation,
+                company: req.body.company
             }
 
             const result2 = await TestimonialService.create(data);
@@ -67,7 +69,9 @@ class TestimonialController {
         try {
             const id = String(req.params.id);
             const data: any = {
-                feedback: req.body.feedback
+                feedback: req.body.feedback,
+                designation: req.body.designation,
+                company: req.body.company
             }
 
             // If a new image is uploaded

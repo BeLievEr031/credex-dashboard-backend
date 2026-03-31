@@ -5,6 +5,8 @@ export interface ITestimonial {
     imageUrl: string;
     publicId: string;
     active: boolean;
+    designation: string;
+    company: string;
 }
 
 
@@ -25,6 +27,14 @@ const TestimonialSchema = new Schema<ITestimonial>({
         type: Boolean,
         required: true,
         default: true
+    },
+    designation: {
+        type: String,
+        required: true
+    },
+    company: {
+        type: String,
+        required: true
     }
 }, {
     timestamps: true
