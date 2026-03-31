@@ -6,6 +6,8 @@ import swaggerSpec from "./docs/swagger.ts";
 import authRoutes from "./module/Auth/auth.routes.ts";
 import blogRoutes from "./module/Blog/blog.routes.ts";
 import productRoutes from "./module/Product/product.routes.ts";
+import testimonialRoutes from "./module/Testimonial/testimonial.routes.ts"
+import dashboardRoutes from "./module/Dashboard/dashboard.routes.ts";
 import errorMiddleware from "./middlewares/errorMiddleware.ts";
 
 class AppWrapper {
@@ -13,8 +15,8 @@ class AppWrapper {
     constructor() {
         this.app = express();
 
-        this.app.use(express.json());
-        this.app.use(express.urlencoded({ extended: true }));
+        this.app.use(express.json({ limit: "10mb" }));
+        this.app.use(express.urlencoded({ extended: true, limit: "10mb" }));
         this.app.use(cookieParser());
         this.app.use(cors({
             origin: ["http://localhost:5173"],
@@ -31,7 +33,9 @@ class AppWrapper {
         apiRouter.use("/auth", authRoutes);
         apiRouter.use("/blog", blogRoutes);
         apiRouter.use("/product", productRoutes);
-        
+        apiRouter.use("/testimonial", testimonialRoutes);
+        apiRouter.use("/dashboard", dashboardRoutes);
+
         this.app.use("/api", apiRouter);
 
         // Global Error Handling

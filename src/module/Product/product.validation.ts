@@ -23,9 +23,9 @@ export const createProductValidation = [
     .optional()
     .isString()
     .withMessage("Rate limit must be a string"),
-  body("productImgUrl")
+  body("image")
     .optional()
-    .isURL()
+    .isString()
     .withMessage("Product image URL must be a valid URL"),
 ];
 
@@ -49,9 +49,9 @@ export const updateProductValidation = [
     .optional()
     .isString()
     .withMessage("Rate limit must be a string"),
-  body("productImgUrl")
+  body("image")
     .optional()
-    .isURL()
+    .isString()
     .withMessage("Product image URL must be a valid URL"),
   body("active")
     .optional()

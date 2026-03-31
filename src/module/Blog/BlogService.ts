@@ -76,10 +76,42 @@ class BlogService {
     return blog;
   }
 
+  async getById(id: string) {
+    const blog = await Blog.findById(id);
+    if (!blog) {
+      throw createError(404, "Blog not found");
+    }
+    return blog;
+  }
+
   async list(query: IBlogQuery) {
     const { page = 1, limit = 10, active = true, sortBy = "createdAt", order = "desc" } = query;
 
     const filter: any = { active };
+    const skip = (page - 1) * limit;
+
+    const blogs = await Blog.find(filter)
+      .sort({ [sortBy]: order === "desc" ? -1 : 1 })
+      .skip(skip)
+      .limit(limit);
+
+    const total = await Blog.countDocuments(filter);
+
+    return {
+      blogs,
+      pagination: {
+        total,
+        page,
+        limit,
+        pages: Math.ceil(total / limit),
+      },
+    };
+  }
+
+  async listBlogsForAdmin(query: IBlogQuery) {
+    const { page = 1, limit = 10, active = true, sortBy = "createdAt", order = "desc" } = query;
+
+    const filter: any = {};
     const skip = (page - 1) * limit;
 
     const blogs = await Blog.find(filter)

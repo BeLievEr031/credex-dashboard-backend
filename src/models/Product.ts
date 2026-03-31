@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import type { Schema, Document } from "mongoose";
 
 export interface IProduct extends Document {
+  publicId: string;
   product: string;
   validity: string;
   credits: string[];
@@ -14,6 +15,10 @@ export interface IProduct extends Document {
 
 const ProductSchema: Schema<IProduct> = new mongoose.Schema(
   {
+    publicId: {
+      type: String,
+      required: [true, "Public ID is required"],
+    },
     product: {
       type: String,
       required: [true, "Product name is required"],

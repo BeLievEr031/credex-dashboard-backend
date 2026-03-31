@@ -43,7 +43,7 @@ class ProductService {
 
     const filter: Record<string, unknown> = { active };
     if (validity) {
-        filter.validity = validity;
+      filter.validity = validity;
     }
 
     const skip = (page - 1) * limit;

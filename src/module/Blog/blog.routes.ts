@@ -127,11 +127,31 @@ router.delete("/delete/:id", authMiddleware, BlogController.delete.bind(BlogCont
  *       404:
  *         description: Blog not found
  */
-router.get("/view/:slug", BlogController.viewBySlug.bind(BlogController));
+router.get("/list/:slug", BlogController.viewBySlug.bind(BlogController));
 
 /**
  * @swagger
- * /blog/view:
+ * /blog/view/{id}:
+ *   get:
+ *     summary: View a blog post by ID
+ *     tags: [Blog]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Blog retrieved successfully
+ *       404:
+ *         description: Blog not found
+ */
+router.get("/view/:id", BlogController.getById.bind(BlogController));
+
+/**
+ * @swagger
+ * /blog/list:
  *   get:
  *     summary: List blog posts with pagination
  *     tags: [Blog]
@@ -161,6 +181,8 @@ router.get("/view/:slug", BlogController.viewBySlug.bind(BlogController));
  *       200:
  *         description: List of blogs retrieved successfully
  */
-router.get("/view", BlogController.list.bind(BlogController));
+router.get("/list", BlogController.list.bind(BlogController));
+
+router.get("/admin/list", authMiddleware, BlogController.listBlogsForAdmin.bind(BlogController));
 
 export default router;

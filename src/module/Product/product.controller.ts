@@ -1,9 +1,18 @@
 import type { Request, Response, NextFunction } from "express";
 import ProductService from "./ProductService.ts";
+import { cloudinary } from "../../utils/image.upload.ts";
 
 class ProductController {
   async create(req: Request, res: Response, next: NextFunction) {
     try {
+
+      if (req.body.image) {
+        const result = await cloudinary.uploader.upload(req.body.image);
+        req.body.productImgUrl = result.secure_url;
+        req.body.image = result.secure_url;
+        req.body.publicId = result.public_id;
+      }
+
       const product = await ProductService.create(req.body);
       res.status(201).json({
         success: true,
@@ -16,6 +25,16 @@ class ProductController {
 
   async update(req: Request, res: Response, next: NextFunction) {
     try {
+      if (req.body.image) {
+        const product = await ProductService.getById(req.params.id as string);
+        if (product.publicId) {
+          await cloudinary.uploader.destroy(product.publicId);
+        }
+        const result = await cloudinary.uploader.upload(req.body.image);
+        req.body.productImgUrl = result.secure_url;
+        req.body.image = result.secure_url;
+        req.body.publicId = result.public_id;
+      }
       const product = await ProductService.update(req.params.id as string, req.body);
       res.status(200).json({
         success: true,
