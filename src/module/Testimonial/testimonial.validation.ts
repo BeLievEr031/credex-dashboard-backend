@@ -16,4 +16,9 @@ export const createTestimonialValidation = [
         .withMessage("company is required")
         .isString()
         .withMessage("company must be a string"),
+    body("type")
+        .notEmpty()
+        .withMessage("type is required")
+        .isIn(["SELLER", "BUYER"])
+        .withMessage("type must be either SELLER or BUYER"),
 ];

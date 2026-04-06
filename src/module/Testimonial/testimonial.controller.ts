@@ -18,7 +18,8 @@ class TestimonialController {
                 publicId: result.public_id,
                 active: req.body.active,
                 designation: req.body.designation,
-                company: req.body.company
+                company: req.body.company,
+                type: req.body.type
             }
 
             const result2 = await TestimonialService.create(data);
@@ -34,7 +35,14 @@ class TestimonialController {
 
     async getAll(req: Request, res: Response, next: NextFunction) {
         try {
-            const testimonials = await TestimonialService.getAll();
+            const { type } = req.query;
+
+            const filter: any = {};
+            if (type) {
+                filter.type = type;
+            }
+
+            const testimonials = await TestimonialService.getAll(filter);
             res.status(200).json({
                 message: "Testimonials retrieved successfully.",
                 data: testimonials
@@ -71,7 +79,8 @@ class TestimonialController {
             const data: any = {
                 feedback: req.body.feedback,
                 designation: req.body.designation,
-                company: req.body.company
+                company: req.body.company,
+                type: req.body.type
             }
 
             // If a new image is uploaded

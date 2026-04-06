@@ -7,6 +7,7 @@ export interface ITestimonial {
     active: boolean;
     designation: string;
     company: string;
+    type: string;
 }
 
 
@@ -34,6 +35,11 @@ const TestimonialSchema = new Schema<ITestimonial>({
     },
     company: {
         type: String,
+        required: true
+    },
+    type: {
+        type: String,
+        enum: ["SELLER", "BUYER"],
         required: true
     }
 }, {
