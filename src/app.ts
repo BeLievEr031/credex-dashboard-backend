@@ -9,6 +9,7 @@ import productRoutes from "./module/Product/product.routes";
 import testimonialRoutes from "./module/Testimonial/testimonial.routes"
 import dashboardRoutes from "./module/Dashboard/dashboard.routes";
 import newsletterRoutes from "./module/Newsletter/newsletter.routes";
+import inquiryRoutes from "./module/Inquiry/inquiry.routes";
 import errorMiddleware from "./middlewares/errorMiddleware";
 
 class AppWrapper {
@@ -37,6 +38,7 @@ class AppWrapper {
         apiRouter.use("/testimonial", testimonialRoutes);
         apiRouter.use("/newsletter", newsletterRoutes);
         apiRouter.use("/dashboard", dashboardRoutes);
+        apiRouter.use("/inquiry", inquiryRoutes);
 
         this.app.use("/api", apiRouter);
 
