@@ -14,6 +14,7 @@ export const inquiryValidation = [
   body("selectedLicenses")
     .isArray({ min: 1 })
     .withMessage("At least one license must be selected"),
+  body("otherPlatforms").optional().trim(),
   body("message").optional().trim(),
   body("type")
     .notEmpty()

@@ -5,6 +5,7 @@ export interface IInquiryRequest {
   phone: string;
   companyName: string;
   selectedLicenses: string[];
+  otherPlatforms?: string;
   message?: string;
   type: "SELLER" | "BUYER";
 }

@@ -7,6 +7,7 @@ export interface IInquiry extends Document {
   phone: string;
   companyName: string;
   selectedLicenses: string[];
+  otherPlatforms?: string;
   message?: string;
   type: "SELLER" | "BUYER";
   createdAt: Date;
@@ -21,6 +22,7 @@ const InquirySchema: Schema = new Schema(
     phone: { type: String, required: true },
     companyName: { type: String, required: true },
     selectedLicenses: { type: [String], required: true },
+    otherPlatforms: { type: String },
     message: { type: String },
     type: { type: String, enum: ["SELLER", "BUYER"], default: "BUYER" },
   },
