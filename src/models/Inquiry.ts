@@ -1,8 +1,7 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 export interface IInquiry extends Document {
-  firstName: string;
-  lastName: string;
+  name: string;
   email: string;
   phone: string;
   companyName: string;
@@ -16,8 +15,7 @@ export interface IInquiry extends Document {
 
 const InquirySchema: Schema = new Schema(
   {
-    firstName: { type: String, required: true },
-    lastName: { type: String, required: true },
+    name: { type: String, required: true },
     email: { type: String, required: true },
     phone: { type: String, required: true },
     companyName: { type: String, required: true },

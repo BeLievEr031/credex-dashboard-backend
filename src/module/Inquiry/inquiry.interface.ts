@@ -1,6 +1,5 @@
 export interface IInquiryRequest {
-  firstName: string;
-  lastName: string;
+  name: string;
   email: string;
   phone: string;
   companyName: string;

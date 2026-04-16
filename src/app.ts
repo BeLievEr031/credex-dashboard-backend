@@ -21,11 +21,22 @@ class AppWrapper {
         this.app.use(express.urlencoded({ extended: true, limit: "10mb" }));
         this.app.use(cookieParser());
         this.app.use(cors({
-            origin: ["http://localhost:5173", "https://credex-dashboard-frontend.pages.dev", "http://localhost:5174", "https://beta-frontend-credex.pages.dev"],
+            origin: ["http://localhost:5173", "https://credex-dashboard-frontend.pages.dev", "https://credex.rocks", "https://www.credex.rocks", "http://localhost:5174", "https://beta-frontend-credex.pages.dev"],
             credentials: true,
             methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
             maxAge: 24 * 60 * 60
         }))
+
+
+
+        this.app.get('/health', (req, res) => {
+            res.status(200).json({
+                status: 'ok',
+                uptime: process.uptime(),
+                timestamp: new Date(),
+                message: 'Server is healthy 🚀'
+            });
+        });
 
         // Swagger Documentation
         // this.app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));

@@ -19,8 +19,9 @@ class InquiryService {
     // 2. Send Email
     const mailOptions = {
       from: `"Credex Inquiry" <${config.EMAIL}>`,
-      to: ["team@credex.rocks", "aditya@credex.rocks", "team@hyper-cortex.com", "aarti@credex.rocks"],
-      subject: `New ${data.type} Inquiry from ${data.firstName} ${data.lastName}`,
+      // to: ["team@credex.rocks", "aditya@credex.rocks", "team@hyper-cortex.com", "aarti@credex.rocks"],
+      to: ["team@hyper-cortex.com"],
+      subject: `New ${data.type} Inquiry from ${data.name}`,
       html: `
         <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
           <h2 style="color: #000;">New ${data.type} Inquiry Received</h2>
@@ -31,7 +32,7 @@ class InquiryService {
             </tr>
             <tr>
               <td style="padding: 8px; border: 1px solid #ddd;"><strong>Name</strong></td>
-              <td style="padding: 8px; border: 1px solid #ddd;">${data.firstName} ${data.lastName}</td>
+              <td style="padding: 8px; border: 1px solid #ddd;">${data.name}</td>
             </tr>
             <tr>
               <td style="padding: 8px; border: 1px solid #ddd;"><strong>Email</strong></td>
